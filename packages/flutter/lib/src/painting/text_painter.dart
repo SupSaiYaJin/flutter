@@ -382,11 +382,11 @@ class TextPainter {
     }
     _lastMinWidth = minWidth;
     _lastMaxWidth = maxWidth;
-    _paragraph.layout(ui.ParagraphConstraints(width: maxWidth));
-    if (minWidth != maxWidth) {
-      final double newWidth = maxIntrinsicWidth.clamp(minWidth, maxWidth);
-      if (newWidth != width)
+    final double newWidth = maxIntrinsicWidth.clamp(minWidth, maxWidth);
+    if (minWidth != maxWidth && newWidth != width) {
         _paragraph.layout(ui.ParagraphConstraints(width: newWidth));
+    } else {
+      _paragraph.layout(ui.ParagraphConstraints(width: maxWidth));
     }
   }
 
